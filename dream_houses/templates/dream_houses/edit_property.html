@@ -1,0 +1,55 @@
+
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ndjekornom Victoire</title>
+   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <script src="https://kit.fontawesome.com/fe02953daa.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="header-edit">
+        <div class="container" >
+            <nav>
+                <h1 class="logo"><span>N</span>djek.</h1>
+                
+                <ul id="sidemenu">
+                    <li><a href="{% url 'dream_houses:dashboard' %}">Dashboard</a></li>
+                   
+                    
+                    <i class="fas  fa-times" onclick="closemenu()"></i>
+                </ul>
+                <i class="fas fa-bars" onclick="openmenu()"></i>
+                
+            </nav>
+         
+        </div>
+    </div>
+
+    <div class="container-new">
+    	<h1 class="subtitle">
+    	Editing:
+    	 {{property.name}} 
+    </h1>
+    	
+    </div>
+    
+        <div class="contact-right">
+                   <form action="{% url 'dream_houses:edit_property' property.id %}" method="post" enctype="multipart/form-data">
+
+
+	{% csrf_token %}
+	{{form.as_p}}
+	<button name="submit" class="btn btn2">Save changes</button>
+	
+</form>
+                    <span id="msg"></span>
+
+                </div>
+
+</body>
+</html>

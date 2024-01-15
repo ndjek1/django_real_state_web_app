@@ -1,0 +1,40 @@
+{% extends "dream_houses/base.html" %}
+
+{% block page_header %}
+
+    
+{% endblock page_header %}
+
+{% block content %}
+
+<div class="properties">
+    <div class="container">
+        <h1 class="subtilte">
+                    Properties
+            </h1>
+
+        <div class="property-list">
+        {% for property in properties %}
+        <div class="property">
+                    {% if property.image %}
+                    <img src="{{ property.image.url }}" alt="{{ property.name }}">
+                {% endif %}
+                    <div class="layer">
+                        <h3>Name: {{ property.name }}</h3>
+                        <p>Price: {{ property.price }}</p>
+                            <a href=""><i class="fa-solid fa-up-right-from-square"></i></i></a>
+                    </div>
+        </div>
+           
+        {% endfor %}
+    </div>
+        
+    </div>
+    
+</div>
+
+
+
+    
+    
+{% endblock content %}

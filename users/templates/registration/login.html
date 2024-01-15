@@ -1,0 +1,57 @@
+
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ndjekornom Victoire</title>
+   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <script src="https://kit.fontawesome.com/fe02953daa.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="header-edit">
+        <div class="container" >
+            <nav>
+                <h1 class="logo"><span>N</span>djek.</h1>
+                
+                <ul id="sidemenu">
+                    <li><a href="{% url 'dream_houses:index' %}">Home</a></li>
+                   
+                    
+                    <i class="fas  fa-times" onclick="closemenu()"></i>
+                </ul>
+                <i class="fas fa-bars" onclick="openmenu()"></i>
+                
+            </nav>
+         
+        </div>
+    </div>
+
+    <div class="container-new">
+    	<h1 class="subtitle">
+    	Log into your account 
+    </h1>
+    </div>
+
+    <div class="contact-right">
+                   {% if formerrors %}
+<p>Your username and password did not match. Please try again</p>
+{% endif %}
+<form action="{% url 'users:login' %}" method="post" class="form">
+	{% csrf_token%}
+	{{form.as_p}}
+	
+	<button name="submit" class="btn btn-primary">Login</button>
+
+	<input type="hidden" name="next" value="{% url 'dream_houses:dashboard' %}">
+	
+</form>
+
+                </div>
+   
+
+</body>
+</html>

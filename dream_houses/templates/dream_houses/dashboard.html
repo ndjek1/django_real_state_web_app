@@ -1,0 +1,79 @@
+{% load static%}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ndjekornom Victoire</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+    <script src="https://kit.fontawesome.com/fe02953daa.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="header">
+        <div class="container" >
+            <nav>
+                <h1 class="logo"><span>N</span>djek.</h1>
+                
+                <ul id="sidemenu">
+                    <li><a href="{% url 'dream_houses:index' %}">Home</a></li>
+                    {% if user.is_authenticated %}
+                   <li >
+                <span >
+                Hello, {{user.username}}
+                </span>
+            </li>
+            <li class="nav-item">
+                <form class="form-inline my-2 my-lg-0" action="{% url 'dream_houses:logout' %}" method="post">
+                    {% csrf_token %}
+                <button class="btn " type="submit"> 
+                Log out</button>
+                <input type="hidden" name="next" value="{% url 'dream_houses:index' %}">
+                </form>
+            </li>
+            {% endif %}
+                    
+                    <i class="fas  fa-times" onclick="closemenu()"></i>
+                </ul>
+                <i class="fas fa-bars" onclick="openmenu()"></i>
+                
+            </nav>
+            <div class="header-text">
+                <h1>Welcome <span>to your dashboard.</span>   <br> Manage your properties here.</h1>
+           </div>
+           <a href="{% url 'dream_houses:new_property' %}" class="btn btn2">Add a property</a>
+           <a href="#properties" class="btn btn2">View Properties</a>
+        </div>
+    </div>
+    
+<div id="properties">
+    <div class="container">
+        <h1 class="subtilte">
+                    My Properties
+            </h1>
+
+        <div class="property-list">
+        {% for property in properties %}
+        <div class="property">
+                    {% if property.image %}
+                    <img src="{{ property.image.url }}" alt="{{ property.name }}">
+                {% endif %}
+                    <div class="layer">
+                        <h3>Name: {{ property.name }}</h3>
+                        <p>Price: {{ property.price }}</p>
+                            <a href="{% url 'dream_houses:edit_property' property.id %}">Edit</a>
+                    </div>
+        </div>
+           
+        {% endfor %}
+    </div>
+        
+    </div>
+    
+</div>
+
+    
+
+</body>
+</html>
