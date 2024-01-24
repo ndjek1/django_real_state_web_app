@@ -6,35 +6,61 @@
 {% endblock page_header %}
 
 {% block content %}
-
-<div class="properties">
-    <div class="container">
-        <h1 class="subtilte">
-                    Properties
-            </h1>
-
-        <div class="property-list">
+ <div id="about">
         {% for property in properties %}
-        <div class="property">
+        <div class="container">
+            
+            <div class="row">
+                
+                <div class="about-col-1">
                     {% if property.image %}
                     <img src="{{ property.image.url }}" alt="{{ property.name }}">
-                {% endif %}
-                    <div class="layer">
-                        <h3>Name: {{ property.name }}</h3>
-                        <p>Price: {{ property.price }}</p>
-                            <a href=""><i class="fa-solid fa-up-right-from-square"></i></i></a>
+                   {% endif %}
+
+                </div>
+                <div class="about-col-2">
+                    
+                    <div class="about-col-2-1">
+                        <p>
+                            <h2>
+                               Name: {{property.name}}
+                            </h2>
+                        </p>
+                        <p>
+                            Type: {{property.property_type}}
+                        </p>
+                        <p>
+                            Price: {{property.price}}
+                        </p>
+                        
                     </div>
+                    <div class="about-col-2-2">
+                        <p>
+                            <h2>
+                                Description
+                            </h2>
+                        </p>
+
+                    </div>
+                    <div class="about-col-2-3">
+                        <p>
+                            <h2>
+                                Owner contact
+                            </h2>
+                        </p>
+                        <p>
+                            {{property.owner.email}}
+                        </p>
+                        <a href="mailto:{{property.owner.email}}" class="btn btn2">Contact owner</a>
+
+                        
+                    </div>
+                    
+                </div>
+                
+            </div>
         </div>
-           
         {% endfor %}
     </div>
-        
-    </div>
-    
-</div>
-
-
-
-    
     
 {% endblock content %}
